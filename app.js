@@ -26,7 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/products',verifyToken, productsRouter);
+//app.use('/products',verifyToken, productsRouter);
+app.use('/products', productsRouter);
 app.use('/categories', categoriesRouter);
 
 // catch 404 and forward to error handler
@@ -45,6 +46,9 @@ function verifyToken(req,res,next){
     }
   })
 }
+
+app.verifyToken = verifyToken
+
 
 // error handler
 app.use(function(err, req, res, next) {
