@@ -31,7 +31,7 @@ module.exports={
           const token = jwt.sign({userId:user._id},req.app.get("secretKey"),{expiresIn:"1h"})
           res.status(201).json({token})
         }else{
-          res.status(401).json({message:"Usuario y/o contraseña incorrectos"})
+          res.status(401).json({message:" contraseña incorrecta"})
         }
       }catch(e){
         //e.status=200
