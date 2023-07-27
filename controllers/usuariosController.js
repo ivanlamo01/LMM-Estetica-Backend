@@ -6,20 +6,20 @@ module.exports={
     create:async function(req, res, next) {
         try{
           console.log(req.body)
-          console.log(req.body.name)
-          const document = new usuariosModel({
-            name:req.body.name,
+          console.log(req.body.userName)
+          const newUser = new usuariosModel({
+            userName:req.body.userName,
             email:req.body.email,
-            password:req.body.password
+            password:req.body.password,
           })
-          const response = await document.save()
-
-          res.json(response)
+          const userSaved = await newUser.save()
+          res.send("Registrando")
+          res.json(userSaved)
         }catch(e){
+          console.log("🚀 ~ file: usuariosController.js:18 ~ create:function ~ e:", e)
           //e.status=200
           next(e)
         }
-        
     },
     login:async function(req, res, next) {
       try{

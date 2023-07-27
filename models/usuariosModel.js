@@ -3,18 +3,29 @@ const bcrypt = require("bcrypt")
 const validators = require("../utils/validators")
 
 const usuariosSchema = mongoose.Schema({
-    name:String,
-    email:String,
+    userName:{
+        type: String,
+        required: true,
+        trim: true,
+        unique: true
+    },
+    email:{
+        type: String,
+        required: true,
+        trim: true,
+        unique: true
+    },
     password:{
         type:String,
         validate:{
             validator: function(value){
                 return validators.isGoodPassword(value)
             },
-            message: "Incorrecto"
+            message: "La contraseña debe tener al menos una letra mayuscula, una minuscula, un numero y un caracter especial "
         }
     }
-})
+},{timestamps:true}
+)
 
 usuariosSchema.pre("save",function(next){
     this.password = bcrypt.hashSync(this.password,10)
