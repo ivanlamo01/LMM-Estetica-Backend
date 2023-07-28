@@ -5,8 +5,10 @@ const jwt = require("jsonwebtoken")
 module.exports={
     create:async function(req, res, next) {
         try{
-          console.log(req.body)
-          console.log(req.body.userName)
+          const userFound = await usuariosModel.findOne({email:req.body.email})
+            if(userFound)
+              return res.status(400).json(["El email ya se encuentra registrado"])
+
           const newUser = new usuariosModel({
             userName:req.body.userName,
             email:req.body.email,
