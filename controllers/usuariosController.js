@@ -8,14 +8,19 @@ module.exports={
           const userFound = await usuariosModel.findOne({email:req.body.email})
             if(userFound)
               return res.status(400).json(["El email ya se encuentra registrado"])
+          
+          const userNameFound = await usuariosModel.findOne({userName:req.body.userName})
+            if(userNameFound)
+              return res.status(400).json(["El nombre de usuario ya se encuentra registrado"])
 
-          const newUser = new usuariosModel({
+            const newUser = new usuariosModel({
             userName:req.body.userName,
             email:req.body.email,
             password:req.body.password,
           })
+
           const userSaved = await newUser.save()
-          res.send("Registrando")
+          res.send("Registrado")
           res.json(userSaved)
         }catch(e){
           console.log("🚀 ~ file: usuariosController.js:18 ~ create:function ~ e:", e)
