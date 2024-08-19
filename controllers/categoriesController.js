@@ -13,9 +13,6 @@ module.exports={
 
     create:async function(req, res, next) {
         try{
-          console.log(req.body)
-          console.log(req.body.name)
-
           const document = new categoriesModel({
             name:req.body.name
           })

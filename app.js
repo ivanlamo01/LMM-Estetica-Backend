@@ -40,7 +40,6 @@ function verifyToken(req,res,next){
     if(error){
       res.json({message:error.message})
     }else{
-      console.log("payload",payload)
       req.body.userId = payload.userId
       next();
     }
